@@ -8,7 +8,7 @@ if [ ! -d "$1" -o ! -d "$2" ];then
     exit 1
 fi
 
-## »ñÈ¡¾ø¶ÔÂ·¾¶
+## 获取绝对路径
 arg1=`readlink -f "$1"`
 arg2=`readlink -f "$2"`
 
@@ -20,7 +20,7 @@ mkdir -p $tmp_dir || exit 0
 
 trap "rm -rf $tmp_dir; exit 0" SIGINT SIGTERM
 
-## »ñÈ¡MD5
+## 获取MD5
 function get_file_md5
 {
     if [ $# -ne 1  ];then
@@ -99,7 +99,7 @@ function check_value
 }
 
 #############################################################
-# »ñÈ¡diff info
+# 获取diff info
 #############################################################
 for file1 in `find "$arg1" | sed 's% %#%g'`
 do
@@ -140,7 +140,7 @@ do
 done
 
 #############################################################
-# ¸ù¾ÝÊäÈë±êÇ©´ò¿ªÓÃvim´ò¿ªÎÄ¼þ±È½Ïdiff
+# 根据输入标签打开用vim打开文件比较diff
 #############################################################
 if [[ ! -f $tmp_dir/diff_file && ! -f $tmp_dir/A_only_file && ! -f $tmp_dir/B_only_file ]];then
     echo folders are the same!
